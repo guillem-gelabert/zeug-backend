@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@ljharb/eslint-config": "13.0.0",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-json": "1.2.1",
+    "eslint-plugin-react": "^7.12.0"
+  },
+  "dependencies": {
+    "babel-eslint": "^10.0.1",
+    "body-parser": "^1.18.3",
+    "cli-interact": "^0.1.9",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "moment": "^2.23.0",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0"
+  }
+}
