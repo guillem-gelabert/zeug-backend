@@ -16,6 +16,9 @@ module.exports = (Sequelize, sequelize) => {
         defaultValue: 'UNSEEN',
       },
     },
+    {
+      timestamps: false,
+    },
   );
   return WordModel;
 };
