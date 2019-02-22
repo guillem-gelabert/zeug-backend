@@ -30,6 +30,9 @@ module.exports = (Sequelize, sequelize) => {
         defaultValue: 0,
       },
     },
+    {
+      timestamps: false,
+    },
   );
   return CardModel;
 };
