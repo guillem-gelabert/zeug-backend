@@ -2,12 +2,11 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 const { json, urlencoded } = require('body-parser');
+const user = require('./controllers/user');
+const { signin, protect } = require('./utils/auth');
 
 const app = express();
 
-// require('./db');
-
-const user = require('./controllers/user');
 const card = require('./controllers/card');
 
 app
@@ -15,11 +14,10 @@ app
   .use(json())
   .use(logger('dev'))
   .use(urlencoded({ extended: true }))
-  .post('/users', user.create)
-  .get('/users', user.getAll)
-  .get('/users/:id', user.getAll)
-  .get('/cards/all/:id', card.getAllCards) // gets all scheduled cards for user id
-  .get('/cards/due/:id', card.getDueCards) // gets all scheduled cards and adds new ones
-  .put('/cards', card.updateCard); // puts updateed card (correct or not) through sm2
+
+  .post('/signup', user.create) // user create
+  .post('/signin', signin)
+  .get('/cards', protect, card.getDueCards) // gets all scheduled cards and adds new ones
+  .put('/cards/:id/answer', card.updateCard); // puts updated card (correct or not) through sm2
 
 module.exports = app;

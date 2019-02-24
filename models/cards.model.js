@@ -18,6 +18,7 @@ module.exports = (Sequelize, sequelize) => {
       nextDueDate: {
         type: Sequelize.DATE,
         allowNull: false,
+        default: new Date(),
       },
       easiness: {
         type: Sequelize.DOUBLE,
@@ -34,5 +35,14 @@ module.exports = (Sequelize, sequelize) => {
       timestamps: false,
     },
   );
+
+  CardModel.getReviewCards = async userId => CardModel.findAll({
+    where: { userId, nextDueDate: { [Sequelize.Op.lte]: new Date() } },
+    attributes: {
+      exclude: ['wordId'],
+    },
+    include: ['word'],
+  });
+
   return CardModel;
 };

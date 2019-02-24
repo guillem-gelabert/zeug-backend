@@ -22,6 +22,8 @@ const User = require('./users.model')(Sequelize, sequelize);
 const Word = require('./words.model')(Sequelize, sequelize);
 const Card = require('./cards.model')(Sequelize, sequelize);
 
+Card.belongsTo(Word, { as: 'word', foreignKey: 'wordId' });
+
 module.exports = {
   User,
   Word,
