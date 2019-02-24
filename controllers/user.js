@@ -1,6 +1,5 @@
 const { User } = require('../models/index');
 
-
 exports.getAll = async (req, res) => {
   try {
     const users = await User.findAll({ attributes: { exclude: ['password'] } });

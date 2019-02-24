@@ -20,5 +20,14 @@ module.exports = (Sequelize, sequelize) => {
       timestamps: false,
     },
   );
+
+  WordModel.getNewWords = async (lastSeenPriority, newWordsPerSession) => WordModel.findAll({
+    where: {
+      priority: {
+        [Sequelize.Op.between]: [lastSeenPriority, newWordsPerSession],
+      },
+    },
+  });
+
   return WordModel;
 };
