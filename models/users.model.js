@@ -46,9 +46,9 @@ module.exports = (Sequelize, sequelize) => {
     user.password = await bcrypt.hashSync(user.password, 10);
   });
 
-  UserModel.prototype.checkPassword = async (password) => {
-    const hash = this.password;
-    await bcrypt.compare(password, hash);
+  UserModel.prototype.checkPassword = async (user, password) => {
+    const hash = user.password;
+    return bcrypt.compare(password, hash);
   };
 
   return UserModel;
