@@ -3,7 +3,7 @@ const { User } = require('../models');
 
 const secret = 'this isnt an appropriate secret';
 
-const newToken = user => jwt.sign({ id: user.id }, secret, { expiresIn: '7d' });
+const newToken = user => jwt.sign({ id: user.id }, secret, { expiresIn: '365d' });
 
 const verifyToken = token => new Promise((resolve, reject) => {
   jwt.verify(token, 'this isnt an appropriate secret', (err, payload) => {
@@ -27,7 +27,15 @@ const signin = async (req, res) => {
     const isPasswordCorrect = await user.checkPassword(user, password);
     if (isPasswordCorrect) {
       const token = newToken(user.dataValues);
-      return res.status(201).send({ jwt: token });
+      const userData = {
+        jwt: token,
+        lastSeenPriority: user.lastSeenPriority,
+        lastUpdate: user.lastUpdate,
+        displayName: user.displayName,
+        newWordsPerSession: user.newWordsPerSession,
+        email: user.email,
+      };
+      return res.status(201).send(userData);
     }
     return res.status(401).send('authentication error');
   } catch (error) {

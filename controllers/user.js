@@ -12,7 +12,7 @@ exports.getAll = async (req, res) => {
 
 exports.getUserDetails = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.user;
     const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
     return res.status(200).send(user);
   } catch (error) {

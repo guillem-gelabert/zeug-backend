@@ -10,7 +10,7 @@ module.exports = {
   test: {
     username: 'root',
     password: 'password',
-    database: 'zeug',
+    database: 'zeug_test',
     host: '127.0.0.1',
     dialect: 'mysql',
   },
